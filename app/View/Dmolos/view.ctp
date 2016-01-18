@@ -1,24 +1,36 @@
 <div class="dmolos view">
-<h2><?php echo __('Dmolo'); ?></h2>
+<h2><?php echo $dmolo['DmlType']['name']; ?></h2>
+<h3><?php echo h($dmolo['Dmolo']['name']); ?></h3>
+	<?php
+		if (!is_null($dmolo['Dmolo']['file_image'])):
+			$imgName = $dmolo['Dmolo']['file_image'];
+			$imgPath0 = 'thumbnail/' . $imgName . '-thumb-0.jpg';
+			$imgPath1 = 'thumbnail/' . $imgName . '-thumb-1.jpg';
+			$imgPath2 = 'thumbnail/' . $imgName . '-thumb-2.jpg';
+			$imgPath3 = 'thumbnail/' . $imgName . '-thumb-3.jpg';
+			echo $this->Html->image( $imgPath0 , array('alt' =>$imgName ));
+			echo '&nbsp';
+			echo $this->Html->image( $imgPath1 , array('alt' =>$imgName ));
+			echo '<br>';
+			echo $this->Html->image( $imgPath2 , array('alt' =>$imgName ));
+			echo '&nbsp';
+			echo $this->Html->image( $imgPath3 , array('alt' =>$imgName ));
+		endif;
+	?>
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Name'); ?></dt>
+		<dt><?php echo __('Item'); ?></dt>
 		<dd>
 			<?php echo h($dmolo['Dmolo']['name']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Dml Type'); ?></dt>
+		<dt><?php echo __('Type'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($dmolo['DmlType']['name'], array('controller' => 'dml_types', 'action' => 'view', $dmolo['DmlType']['id'])); ?>
+			<?php echo $dmolo['DmlType']['name']; ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Layout Type'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($dmolo['LayoutType']['name'], array('controller' => 'layout_types', 'action' => 'view', $dmolo['LayoutType']['id'])); ?>
+			<?php echo $dmolo['LayoutType']['name']; ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Person Num'); ?></dt>
@@ -26,59 +38,14 @@
 			<?php echo h($dmolo['Dmolo']['person_num']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Note'); ?></dt>
+		<dt><?php echo __('Price'); ?></dt>
 		<dd>
-			<?php echo h($dmolo['Dmolo']['note']); ?>
+			<?php echo h($dmolo['Dmolo']['price']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('File Dwg'); ?></dt>
+		<dt><?php echo __('Detail'); ?></dt>
 		<dd>
-			<?php echo h($dmolo['Dmolo']['file_dwg']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Quotation'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_quotation']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Image 0'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_image_0']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Image 1'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_image_1']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Image 2'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_image_2']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Image 3'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_image_3']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Thumbnail 0'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_thumbnail_0']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Thumbnail 1'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_thumbnail_1']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Thumbnail 2'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_thumbnail_2']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Thumbnail 3'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_thumbnail_3']); ?>
+			<?php echo h($dmolo['Dmolo']['note_detail']); ?>
 			&nbsp;
 		</dd>
 	</dl>
@@ -86,13 +53,13 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Dmolo'), array('action' => 'edit', $dmolo['Dmolo']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Dmolo'), array('action' => 'delete', $dmolo['Dmolo']['id']), array(), __('Are you sure you want to delete # %s?', $dmolo['Dmolo']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Dmolos'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Dmolo'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Dml Types'), array('controller' => 'dml_types', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Dml Type'), array('controller' => 'dml_types', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Layout Types'), array('controller' => 'layout_types', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Layout Type'), array('controller' => 'layout_types', 'action' => 'add')); ?> </li>
+		<li><?php //echo $this->Html->link(__('Edit Dmolo'), array('action' => 'edit', $dmolo['Dmolo']['id'])); ?> </li>
+		<li><?php //echo $this->Form->postLink(__('Delete Dmolo'), array('action' => 'delete', $dmolo['Dmolo']['id']), array(), __('Are you sure you want to delete # %s?', $dmolo['Dmolo']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Back to the list'), array('action' => 'index')); ?> </li>
+		<li><?php //echo $this->Html->link(__('New Dmolo'), array('action' => 'add')); ?> </li>
+		<li><?php //echo $this->Html->link(__('List Dml Types'), array('controller' => 'dml_types', 'action' => 'index')); ?> </li>
+		<li><?php //echo $this->Html->link(__('New Dml Type'), array('controller' => 'dml_types', 'action' => 'add')); ?> </li>
+		<li><?php //echo $this->Html->link(__('List Layout Types'), array('controller' => 'layout_types', 'action' => 'index')); ?> </li>
+		<li><?php //echo $this->Html->link(__('New Layout Type'), array('controller' => 'layout_types', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

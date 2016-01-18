@@ -8,17 +8,12 @@
 		echo $this->Form->input('dml_type_id');
 		echo $this->Form->input('layout_type_id');
 		echo $this->Form->input('person_num');
+		echo $this->Form->input('price');
 		echo $this->Form->input('note');
+		echo $this->Form->input('note_detail');
 		echo $this->Form->input('file_dwg');
 		echo $this->Form->input('file_quotation');
-		echo $this->Form->input('file_image_0');
-		echo $this->Form->input('file_image_1');
-		echo $this->Form->input('file_image_2');
-		echo $this->Form->input('file_image_3');
-		echo $this->Form->input('file_thumbnail_0');
-		echo $this->Form->input('file_thumbnail_1');
-		echo $this->Form->input('file_thumbnail_2');
-		echo $this->Form->input('file_thumbnail_3');
+		echo $this->Form->input('file_image');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

@@ -26,9 +26,19 @@
 			<?php echo h($dmolo['Dmolo']['person_num']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Price'); ?></dt>
+		<dd>
+			<?php echo h($dmolo['Dmolo']['price']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Note'); ?></dt>
 		<dd>
 			<?php echo h($dmolo['Dmolo']['note']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Note Detail'); ?></dt>
+		<dd>
+			<?php echo h($dmolo['Dmolo']['note_detail']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('File Dwg'); ?></dt>
@@ -41,44 +51,9 @@
 			<?php echo h($dmolo['Dmolo']['file_quotation']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('File Image 0'); ?></dt>
+		<dt><?php echo __('File Image'); ?></dt>
 		<dd>
-			<?php echo h($dmolo['Dmolo']['file_image_0']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Image 1'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_image_1']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Image 2'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_image_2']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Image 3'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_image_3']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Thumbnail 0'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_thumbnail_0']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Thumbnail 1'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_thumbnail_1']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Thumbnail 2'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_thumbnail_2']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('File Thumbnail 3'); ?></dt>
-		<dd>
-			<?php echo h($dmolo['Dmolo']['file_thumbnail_3']); ?>
+			<?php echo h($dmolo['Dmolo']['file_image']); ?>
 			&nbsp;
 		</dd>
 	</dl>
