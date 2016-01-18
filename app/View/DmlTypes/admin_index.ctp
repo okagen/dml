@@ -1,6 +1,19 @@
+<div class="actions">
+	<h3><?php echo __('Actions'); ?></h3>
+	<?php
+		echo  $this->Html->link(__('New Dml Type'),
+			array('action' => 'add'),
+			array('class'=>'btn btn-success')
+		);
+		echo  $this->Html->link(__('List Dmolos'),
+			array('controller' => 'dmolos', 'action' => 'index'),
+			array('class'=>'btn btn-info')
+		);
+	?>
+</div>
 <div class="dmlTypes index">
 	<h2><?php echo __('Dml Types'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
+	<table class="table table-striped table-hover ">
 	<thead>
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
@@ -14,9 +27,14 @@
 		<td><?php echo h($dmlType['DmlType']['id']); ?>&nbsp;</td>
 		<td><?php echo h($dmlType['DmlType']['name']); ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $dmlType['DmlType']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $dmlType['DmlType']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $dmlType['DmlType']['id']), array(), __('Are you sure you want to delete # %s?', $dmlType['DmlType']['id'])); ?>
+			<?php
+				echo  $this->Html->link(__('Edit'),
+					array('action' => 'edit', $dmlType['DmlType']['id']),
+					array('class'=>'btn btn-warning')
+				);
+				echo ('<br/>');
+				echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $dmlType['DmlType']['id']), array(), __('Are you sure you want to delete # %s?', $dmlType['DmlType']['id']));
+			?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -36,11 +54,4 @@
 	?>
 	</div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Dml Type'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Dmolos'), array('controller' => 'dmolos', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Dmolo'), array('controller' => 'dmolos', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+

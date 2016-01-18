@@ -14,7 +14,13 @@ class DmolosController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+
+	public $components = array( 'Session',
+		'Paginator' => array(
+			'limit' => 10,
+			'order' => array('id' => 'desc')
+		)
+	);
 
 /**
  * index method
