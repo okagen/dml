@@ -32,10 +32,12 @@
 		<td><?php echo $dmolo['Dmolo']['note']; ?>&nbsp;</td>
 		<td><?php echo h($dmolo['Dmolo']['price']); ?>&nbsp;</td>
 		<td>
-			<?php echo  $this->Html->link(__('Detail'),
-            	array('action' => 'view', $dmolo['Dmolo']['id']),
-            	array('class'=>'btn btn-info')
-            	);
+            <?php
+                echo $this->Html->link(
+                    $this->Html->tag('i', '', array('class' => 'icon-circle-arrow-right icon-white')) . " Detail",
+                    array('action' => 'view', $dmolo['Dmolo']['id']),
+                    array('class' => 'btn btn-small btn-info', 'escape' => false)
+                );
             ?>
 		</td>
 	</tr>

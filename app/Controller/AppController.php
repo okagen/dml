@@ -30,8 +30,58 @@ App::uses('Controller', 'Controller');
  * @package		app.Controller
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
+
+//http://book.cakephp.org/2.0/ja/tutorials-and-examples/blog-auth-example/auth.html
+
 class AppController extends Controller {
-    var $components = array('DebugKit.Toolbar');
+    var $components = array(
+        'DebugKit.Toolbar',
+        'Auth' => array(
+            //ログイン後の移動先
+            'loginRedirect' => array('controller' => 'Dmolos','action' => 'index'),
+            //ログインページのパス 認証が必要なURLに非認証状態でログインされた場合にこのURLへ飛ばす
+            'loginAction' => array('controller' => 'Users', 'action' => 'login', 'admin' => false),
+            //ログアウト後の移動先
+            'logoutRedirect' => array('controller' => 'Users', 'action' => 'login', true),
+            'authenticate' => array(
+                'Form' => array(
+                    'passwordHasher' => 'Blowfish'
+                )
+            ),
+            //カスタマイズした権限判定を利用するために追記
+            'authorize' => array('Controller'),
+        )
+    );
+
+    //カスタマイズした権限判定　ログインできるユーザかどうかを判定
+    public function isAuthorized($user) {
+
+        if (
+            (isset($user['role']) && $user['role'] === 'admin')
+          //   or
+          //  (isset($user['role']) && $user['role'] === 'user')
+            ) {
+            return true;
+        }
+        return false;
+    }
 
     public $layout = 'bootstrap';
+
+    public $helpers = array(
+        'Session',
+        'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
+        'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
+        'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
+    );
+
+    public function beforeFilter() {
+
+        // 認証情報をコンポーネントをViewで利用可能にしておく
+        //$this->Auth->allow('login');
+        $this->Auth->allow('login');
+        $this->Auth->allow('logout');
+        $this->set('role', $this->Auth->user('role'));
+        $this->set('username', $this->Auth->user('username'));
+    }
 }

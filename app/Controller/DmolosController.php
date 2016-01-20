@@ -22,6 +22,13 @@ class DmolosController extends AppController {
 		)
 	);
 
+	public function isAuthorized($user) {
+    if (in_array($this->action, array('index', 'view'))) {
+            return true;
+        }
+	    return parent::isAuthorized($user);
+	}
+
 /**
  * index method
  *
@@ -45,74 +52,6 @@ class DmolosController extends AppController {
 		}
 		$options = array('conditions' => array('Dmolo.' . $this->Dmolo->primaryKey => $id));
 		$this->set('dmolo', $this->Dmolo->find('first', $options));
-	}
-
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Dmolo->create();
-			if ($this->Dmolo->save($this->request->data)) {
-				$this->Session->setFlash(__('The dmolo has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The dmolo could not be saved. Please, try again.'));
-			}
-		}
-		$dmlTypes = $this->Dmolo->DmlType->find('list');
-		$layoutTypes = $this->Dmolo->LayoutType->find('list');
-		$this->set(compact('dmlTypes', 'layoutTypes'));
-	}
-
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
-		if (!$this->Dmolo->exists($id)) {
-			throw new NotFoundException(__('Invalid dmolo'));
-		}
-		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Dmolo->save($this->request->data)) {
-				$this->Session->setFlash(__('The dmolo has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The dmolo could not be saved. Please, try again.'));
-			}
-		} else {
-			$options = array('conditions' => array('Dmolo.' . $this->Dmolo->primaryKey => $id));
-			$this->request->data = $this->Dmolo->find('first', $options);
-		}
-		$dmlTypes = $this->Dmolo->DmlType->find('list');
-		$layoutTypes = $this->Dmolo->LayoutType->find('list');
-		$this->set(compact('dmlTypes', 'layoutTypes'));
-	}
-
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->Dmolo->id = $id;
-		if (!$this->Dmolo->exists()) {
-			throw new NotFoundException(__('Invalid dmolo'));
-		}
-		$this->request->allowMethod('post', 'delete');
-		if ($this->Dmolo->delete()) {
-			$this->Session->setFlash(__('The dmolo has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The dmolo could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
 	}
 
 /**

@@ -5,37 +5,46 @@
 			<div align="center">
 			<?php
 				echo $this->Html->link(
-				    $this->Html->tag('i', '', array('class' => 'icon-list icon-white')) . " New Layout Type",
+				    $this->Html->tag('i', '', array('class' => 'icon-user icon-white')) . " New User",
 				    array('action' => 'add'),
 				    array('class' => 'btn btn-small btn-info', 'escape' => false)
 				);
 			?>
 			</div>
 		</div>
+
+
 		<div class="span10 users index">
-			<legend><?php echo __('Layout Types'); ?></legend>
+			<legend><?php echo __('Users'); ?></legend>
 			<table class="table table-striped table-hover ">
 			<thead>
 			<tr>
 					<th><?php echo $this->Paginator->sort('id'); ?></th>
-					<th><?php echo $this->Paginator->sort('name'); ?></th>
+					<th><?php echo $this->Paginator->sort('username'); ?></th>
+					<th><?php echo $this->Paginator->sort('email'); ?></th>
+					<th><?php echo $this->Paginator->sort('password'); ?></th>
+					<th><?php echo $this->Paginator->sort('role'); ?></th>
 					<th class="actions"><?php echo __('Actions'); ?></th>
 			</tr>
 			</thead>
 			<tbody>
-			<?php foreach ($layoutTypes as $layoutType): ?>
+			<?php foreach ($users as $user): ?>
 			<tr>
-				<td><?php echo h($layoutType['LayoutType']['id']); ?>&nbsp;</td>
-				<td><?php echo h($layoutType['LayoutType']['name']); ?>&nbsp;</td>
+				<td><?php echo h($user['User']['id']); ?>&nbsp;</td>
+				<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
+				<td><?php echo h($user['User']['email']); ?>&nbsp;</td>
+				<td>****&nbsp;</td>
+				<td><?php echo h($user['User']['role']); ?>&nbsp;</td>
 				<td class="actions">
 					<?php
 						echo $this->Html->link(
 						    $this->Html->tag('i', '', array('class' => 'icon-edit icon-white')) . " Edit",
-						    array('action' => 'edit', $layoutType['LayoutType']['id']),
+						    array('action' => 'edit', $user['User']['id']),
 						    array('class' => 'btn btn-small btn-warning', 'escape' => false)
 						);
 		            	echo ('<br/>');
-						echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $layoutType['LayoutType']['id']), array(), __('Are you sure you want to delete # %s?', $layoutType['LayoutType']['id']));
+						echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), array(), __('Are you sure you want to delete # %s?', $user['User']['id'])
+						);
 					?>
 				</td>
 			</tr>
@@ -60,3 +69,5 @@
 	));
 	?>
 </div>
+
+

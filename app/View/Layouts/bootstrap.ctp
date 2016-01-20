@@ -43,13 +43,80 @@
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
+
+	<div class="row">
+		<div class="span9" style="height:10px; color:#808080";>
+			<h4>
+			<?php echo  $this->Html->link(__('D-MOLO and D-MOLO Plus sample catalog'),
+					array('controller' => 'Dmolos', 'action' => 'index')
+				);
+			?>
+			</h4>
+		</div>
+		<?php
+			//Users/login画面以外では、権限、ユーザ名、logoutを表示する。
+			if(stristr(Router::url(), 'login') === false){
+				echo '<div class="span3" align="right">';
+				echo '<h5>';
+				if($role === 'admin') {
+					echo '<font color="#ff9933">';
+					echo $role;
+					echo ':::</font>';
+				}
+				echo $username;
+				echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+				echo  $this->Html->link(__('logout'),
+					array('controller' => 'Users', 'action' => 'logout')
+				);
+				echo ('</h5>');
+				echo ('</div>');
+			}
+		?>
+	</div>
+	<?php
+		if($role === 'admin'){
+			echo '<div class="row" style="font-size:medium;">';
+				echo $this->Html->link(
+				    $this->Html->tag('i', '', array('class' => 'icon-home')) . " Home",
+				    array('controller' => 'Dmolos', 'action' => 'index', 'admin' => false),
+				    array('class' => 'btn btn-small', 'escape' => false)
+				);
+				echo $this->Html->link(
+				    $this->Html->tag('i', '', array('class' => 'icon-list')) . " DmlTypes",
+				    array('controller' => 'DmlTypes', 'action' => 'index', 'admin' => true),
+				    array('class' => 'btn btn-small', 'escape' => false)
+				);
+				echo $this->Html->link(
+				    $this->Html->tag('i', '', array('class' => 'icon-list')) . " LayoutTypes",
+				    array('controller' => 'LayoutTypes', 'action' => 'index', 'admin' => true),
+				    array('class' => 'btn btn-small', 'escape' => false)
+				);
+				echo $this->Html->link(
+				    $this->Html->tag('i', '', array('class' => 'icon-list')) . " Dmolos",
+				    array('controller' => 'Dmolos', 'action' => 'index', 'admin' => true),
+				    array('class' => 'btn btn-small', 'escape' => false)
+				);
+				echo $this->Html->link(
+				    $this->Html->tag('i', '', array('class' => 'icon-comment')) . " Notifications",
+				    array('controller' => 'Notifications', 'action' => 'index', 'admin' => true),
+				    array('class' => 'btn btn-small', 'escape' => false)
+				);
+				echo $this->Html->link(
+				    $this->Html->tag('i', '', array('class' => 'icon-user')) . " Users",
+				    array('controller' => 'Users', 'action' => 'index', 'admin' => true),
+				    array('class' => 'btn btn-small', 'escape' => false)
+				);
+			echo '</div>';
+		}
+	?>
+<!--
 				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="#"><?php echo __('D-MOLO and D-MOLO Plus sample catalog'); ?></a>
-<!--
+				<a class="brand" href="#"><?php //echo __('D-MOLO and D-MOLO Plus sample catalog'); ?></a>
+
 				<div class="nav-collapse">
 					<ul class="nav">
 						<li class="active"><a href="#">Home</a></li>
@@ -62,15 +129,19 @@
 		</div>
 	</div>
 
+<br/>
+
 	<div class="container">
 		<?php echo $this->Session->flash(); ?>
+
+
 		<?php echo $this->fetch('content'); ?>
 	</div> <!-- /container -->
 
 	<!-- Le javascript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<?php echo $this->Html->script('bootstrap.min'); ?>
 	<?php echo $this->fetch('script'); ?>
 

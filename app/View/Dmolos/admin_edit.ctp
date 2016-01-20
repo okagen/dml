@@ -20,15 +20,10 @@
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Dmolo.id')), array(), __('Are you sure you want to delete # %s?', $this->Form->value('Dmolo.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Dmolos'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Dml Types'), array('controller' => 'dml_types', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Dml Type'), array('controller' => 'dml_types', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Layout Types'), array('controller' => 'layout_types', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Layout Type'), array('controller' => 'layout_types', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+<?php
+    echo $this->Html->link(
+        $this->Html->tag('i', '', array('class' => 'icon-arrow-left')) . " Cancel",
+        array('action' => 'index'),
+        array('class' => 'btn btn-small', 'escape' => false)
+    );
+?>

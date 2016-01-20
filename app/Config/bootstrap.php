@@ -90,35 +90,11 @@ Configure::write('Dispatcher.filters', array(
 	'CacheDispatcher'
 ));
 
-//CakeDC/usersを導入
-//参照 : http://qiita.com/watako/items/4e1923073af8bbc33e91
-//git clone https://github.com/CakeDC/users.git app/Plugin/Users
-//git submodule update --init
-CakePlugin::load('Users');
-//Email configuration
-Configure::write('Users.emailConfig', 'default');
-Configure::write('App.defaultEmail','okagen@uchida.co.jp');
-//Roles Management
-Configure::write('Users.roles', array(
-    'admin' => 'Admin',
-    'registered' => 'Registered'
-));
-//Enabling / Disabling Registration
-Configure::write('Users.disableDefaultAuth', false);
-Configure::write('Users.allowRegistration', true);
-Configure::write('Users.roles', false);
-Configure::write('Users.sendPassword', false);
-CakePlugin::load('Users', array(
-    'routes' => true
-));
-
 //slywalker/TwitterBootstrapを導入
 //参照：http://www.php-mysql-linux.com/cake-php/twitterbootstrap-use/
 //git clone https://github.com/slywalker/TwitterBootstrap.git app/Plugin/TwitterBootstrap
 //git submodule update --init
 CakePlugin::load('TwitterBootstrap');
-
-
 
 /**
  * Configures default file logging options
@@ -134,3 +110,4 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+

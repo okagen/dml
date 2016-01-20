@@ -1,17 +1,10 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<?php
-		echo  $this->Html->link(__('New Dmolo'),
-			array('action' => 'add'),
-			array('class'=>'btn btn-success')
-		);
-		echo  $this->Html->link(__('List Dml Types'),
-			array('controller' => 'dml_types', 'action' => 'index'),
-			array('class'=>'btn btn-info')
-		);
-		echo  $this->Html->link(__('List Layout Types'),
-			array('controller' => 'layout_types', 'action' => 'index'),
-			array('class'=>'btn btn-info')
+		echo $this->Html->link(
+		    $this->Html->tag('i', '', array('class' => 'icon-list icon-white')) . " New Dmolo",
+		    array('action' => 'add'),
+		    array('class' => 'btn btn-small btn-info', 'escape' => false)
 		);
 	?>
 </div>
@@ -73,16 +66,18 @@
 		</td>
 		<td class="actions">
 		<?php
-			echo  $this->Html->link(__('View'),
-				array('action' => 'view', $dmolo['Dmolo']['id']),
-				array('class'=>'btn btn-primary')
+			echo $this->Html->link(
+			    $this->Html->tag('i', '', array('class' => ' icon-check icon-white')) . " View",
+			    array('action' => 'view', $dmolo['Dmolo']['id']),
+			    array('class' => 'btn btn-small btn-primary', 'escape' => false)
 			);
-			echo ('<br/>');
-			echo  $this->Html->link(__('Edit'),
-				array('action' => 'edit', $dmolo['Dmolo']['id']),
-				array('class'=>'btn btn-warning')
+        	echo '<br/>';
+			echo $this->Html->link(
+			    $this->Html->tag('i', '', array('class' => 'icon-edit icon-white')) . " Edit",
+			    array('action' => 'edit', $dmolo['Dmolo']['id']),
+			    array('class' => 'btn btn-small btn-warning', 'escape' => false)
 			);
-
+        	echo '<br/>';
 			echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $dmolo['Dmolo']['id']), array(), __('Are you sure you want to delete # %s?', $dmolo['Dmolo']['id']));
 		?>
 		</td>
