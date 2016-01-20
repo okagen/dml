@@ -35,7 +35,19 @@
 <br/>
 <div class="container">
 	<div class='row'>
-		<div class='span10' style="height:400px; background-color:#FFDBC9;color:#808080; ">
+        <div class='span1' style="height:400px;">
+            <h3 class="panel-title" style="color:#808080;">Action</h3>
+            <?php
+                echo $this->Html->link(
+                    $this->Html->tag('i', '', array('class' => 'icon-arrow-left')) . " Back",
+                    array('action' => 'index'),
+                    array('class' => 'btn btn-small btn-block', 'escape' => false)
+                );
+
+            ?>
+        </div>
+
+		<div class='span9' style="height:400px; background-color:#FFDBC9;color:#808080;border-radius: 10px;box-shadow: 5px 5px 5px #AAA; ">
 			<div class="panel-heading">
 				<h3 class="panel-title" align="center">Configuration details</h3>
 			</div>
@@ -77,40 +89,30 @@
 			</div>
 		</div>
 		<div class='span2' style="height:400px;" align="center">
-			<h4 class="panel-title" style="color:#808080;">Download</h4>
+			<h3 class="panel-title" style="color:#808080;">Download</h3>
             <?php
                 echo $this->Html->link(
                     $this->Html->tag('i', '', array('class' => 'icon-file icon-white')) . " Quotation",
                     array('action' => 'filedownload', 'quo', $dmolo['Dmolo']['file_quotation'], $dmolo['Dmolo']['id']),
                     array('class' => 'btn btn-primary btn-block', 'escape' => false)
                 );
+                echo 'The file format for Excel 2010. <br/><br/>';
 
                 echo $this->Html->link(
                     $this->Html->tag('i', '', array('class' => 'icon-picture icon-white')) . " CG Perspective",
                     array('action' => 'filedownload', 'cg', $dmolo['Dmolo']['file_image'], $dmolo['Dmolo']['id']),
                     array('class' => 'btn btn-primary btn-block', 'escape' => false)
                 );
+                echo '4 JPG files. <br/><br/>';
 
                 echo $this->Html->link(
                     $this->Html->tag('i', '', array('class' => 'icon-download-alt icon-white')) . " 3D model",
                     array('action' => 'filedownload', 'dwg', $dmolo['Dmolo']['file_dwg'], $dmolo['Dmolo']['id']),
                     array('class' => 'btn btn-primary btn-block', 'escape' => false)
                 );
-            ?>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-			<h4 class="panel-title" style="color:#808080;">Action</h4>
-			<?php
-			    echo $this->Html->link(
-			        $this->Html->tag('i', '', array('class' => 'icon-arrow-left')) . " Back to the list",
-			        array('action' => 'index'),
-			        array('class' => 'btn btn-small btn-block', 'escape' => false)
-			    );
+                echo 'AutoCAD 2013 DWG file format. <br/><br/>';
 
-			?>
+            ?>
 		</div>
 	</div>
 </div>
