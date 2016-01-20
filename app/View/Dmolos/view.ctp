@@ -83,19 +83,19 @@
             <?php
                 echo $this->Html->link(
                     $this->Html->tag('i', '', array('class' => 'icon-file icon-white')) . " Quotation",
-                    array('action' => ''),
+                    array('action' => 'filedownload'),
                     array('class' => 'btn btn-small btn-primary btn-block', 'escape' => false)
                 );
 
                 echo $this->Html->link(
                     $this->Html->tag('i', '', array('class' => 'icon-picture icon-white')) . " CG Perspective",
-                    array('action' => ''),
+                    array('action' => 'filedownload', 'cg', $dmolo['Dmolo']['file_image']),
                     array('class' => 'btn btn-small btn-primary btn-block', 'escape' => false)
                 );
 
                 echo $this->Html->link(
                     $this->Html->tag('i', '', array('class' => 'icon-download-alt icon-white')) . " 3D model",
-                    array('action' => ''),
+                    array('action' => 'filedownload', 'dwg'),
                     array('class' => 'btn btn-small btn-primary btn-block', 'escape' => false)
                 );
             ?>

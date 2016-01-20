@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>
-		<?php echo __('CakePHP: the rapid development php framework:'); ?>
+		<?php echo __('D-MOLO.com'); ?>
 		<?php echo $title_for_layout; ?>
 	</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
