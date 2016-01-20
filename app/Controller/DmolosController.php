@@ -24,7 +24,7 @@ class DmolosController extends AppController {
 	);
 
 	public function isAuthorized($user) {
-    if (in_array($this->action, array('index', 'view'))) {
+    if (in_array($this->action, array('index', 'view', 'filedownload'))) {
             return true;
         }
 	    return parent::isAuthorized($user);
@@ -55,101 +55,67 @@ class DmolosController extends AppController {
 		$this->set('dmolo', $this->Dmolo->find('first', $options));
 	}
 
-	public function filedownload( $category = null, $filename = null ) {
-	    //$this->autoRender = false;
-
+	public function filedownload( $category = null, $filename = null, $id = null ) {
+		// ビューを出力しないようにする
+        $this->autoRender = false;
 		//$categoryが設定されていなかった場合エラーを表示
 	    if(!$category){
-	        $this->Session->setFlash(__('Invalid category of data.'),
+	        $this->Session->setFlash(__('Category was not detected.'),
 	        							'alert', array(
 											'plugin' => 'TwitterBootstrap',
 											'class' => 'alert-error'
 										), 'flash');
-	        return false;
+	        return $this->redirect(array('action' => 'view', $id));
 	    }
 	    //$filenameが設定されていなかった場合
 	    if(!$filename){
-	        $this->Session->setFlash(__('The name of file could not be identified.'),
+	        $this->Session->setFlash(__('File name was not detected.'),
 	        							'alert', array(
 											'plugin' => 'TwitterBootstrap',
 											'class' => 'alert-error'
 										), 'flash');
-	        return false;
+	        return $this->redirect(array('action' => 'view', $id));
 	    }
+	    //ファイルを取得
 		$dir = new Folder(WWW_ROOT . 'files' . DS . $category);
-		$files = $dir->find( $filename . '-*.*' , true);
+		$files = $dir->find($filename . '-*.*' , true);
+		//Downloadするためのファイルが見つからない場合エラー
 		if(count($files) < 1){
-	        $this->Session->setFlash(__('The required files could not be found.::' . $filename ),
+	        $this->Session->setFlash(__('The required files could not be found. :: ' .DS.$category.DS.$filename ),
 	        							'alert', array(
 											'plugin' => 'TwitterBootstrap',
 											'class' => 'alert-error'
 										), 'flash');
-	        return false;
+	        return $this->redirect(array('action' => 'view', $id));
 		} else {
+			// Zipクラスロード
+			$zip = new ZipArchive();
+			// Zipファイル名
+			$zipFileName = $filename . '_' . $category . '.zip';
+			// Zipファイル一時保存ディレクトリ
+			$zipTmpDir = WWW_ROOT.'files'.DS.'tmp';
+			// Zipファイルオープン
+			$result = $zip->open($zipTmpDir.DS.$zipFileName, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
+			if ($result !== true) {
+			    // 失敗した時の処理
+			}
+			// 処理制限時間を外す
+			set_time_limit(0);
+			foreach ($files as $file) {
+			    // 取得ファイルをZipに追加していく
+			    $zip->addFromString($file, file_get_contents( $dir->path.DS.$file ));
+			}
+			$zip->close();
 
+			// ストリームに出力
+			header('Content-Type: application/zip; name="' . $zipFileName . '"');
+			header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
+			header('Content-Length: '.filesize($zipTmpDir.DS.$zipFileName));
+			echo file_get_contents($zipTmpDir.DS.$zipFileName);
 
-
+			// 一時ファイルを削除しておく
+			unlink($zipTmpDir.DS.$zipFileName);
+			exit();
 		}
-
-
-
-
-
-
-
-
-
-
-/*
-// Zipクラスロード
-$zip = new ZipArchive();
-// Zipファイル名
-$zipFileName = 'hogehoge.zip';
-// Zipファイル一時保存ディレクトリ
-$zipTmpDir = WWW_ROOT . '/files';
-
-// Zipファイルオープン
-$result = $zip->open($zipTmpDir.$zipFileName, ZIPARCHIVE::CREATE | ZIPARCHIVE::OVERWRITE);
-if ($result !== true) {
-    // 失敗した時の処理
-}
-
-// ここでDB等から画像イメージ配列を取ってくる
-$image_data_array = [WWW_ROOT . DS. 'files' . DS . 'cg' . DS . 'DM-BTB2-B0-NA-WST-1470-PW-0.jpg'];
-
-// 処理制限時間を外す
-set_time_limit(0);
-
-foreach ($image_data_array as $filepath) {
-
-    $filename = basename($filepath);
-
-    // 取得ファイルをZipに追加していく
-    $zip->addFromString($filename,file_get_contents($filepath));
-
-}
-
-$zip->close();
-
-// ストリームに出力
-header('Content-Type: application/zip; name="' . $zipFileName . '"');
-header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
-header('Content-Length: '.filesize($zipTmpDir.$zipFileName));
-echo file_get_contents($zipTmpDir.$zipFileName);
-
-// 一時ファイルを削除しておく
-//unlink($zipTmpDir.$zipFileName);
-exit();
-*/
-
-
-	    /*
-
-
-	    $this->response->type('application/zip');
-	    $this->response->file('files/test.zip', array('download' => true));
-	    $this->response->download('test2.zip');
-	    */
 	}
-
 }

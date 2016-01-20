@@ -35,8 +35,6 @@
 <br/>
 <div class="container">
 	<div class='row'>
-
-
 		<div class='span10' style="height:400px; background-color:#FFDBC9;color:#808080; ">
 			<div class="panel-heading">
 				<h3 class="panel-title" align="center">Configuration details</h3>
@@ -83,20 +81,20 @@
             <?php
                 echo $this->Html->link(
                     $this->Html->tag('i', '', array('class' => 'icon-file icon-white')) . " Quotation",
-                    array('action' => 'filedownload'),
-                    array('class' => 'btn btn-small btn-primary btn-block', 'escape' => false)
+                    array('action' => 'filedownload', 'quo', $dmolo['Dmolo']['file_quotation'], $dmolo['Dmolo']['id']),
+                    array('class' => 'btn btn-primary btn-block', 'escape' => false)
                 );
 
                 echo $this->Html->link(
                     $this->Html->tag('i', '', array('class' => 'icon-picture icon-white')) . " CG Perspective",
-                    array('action' => 'filedownload', 'cg', $dmolo['Dmolo']['file_image']),
-                    array('class' => 'btn btn-small btn-primary btn-block', 'escape' => false)
+                    array('action' => 'filedownload', 'cg', $dmolo['Dmolo']['file_image'], $dmolo['Dmolo']['id']),
+                    array('class' => 'btn btn-primary btn-block', 'escape' => false)
                 );
 
                 echo $this->Html->link(
                     $this->Html->tag('i', '', array('class' => 'icon-download-alt icon-white')) . " 3D model",
-                    array('action' => 'filedownload', 'dwg'),
-                    array('class' => 'btn btn-small btn-primary btn-block', 'escape' => false)
+                    array('action' => 'filedownload', 'dwg', $dmolo['Dmolo']['file_dwg'], $dmolo['Dmolo']['id']),
+                    array('class' => 'btn btn-primary btn-block', 'escape' => false)
                 );
             ?>
             <br/>
