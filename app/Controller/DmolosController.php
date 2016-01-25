@@ -15,20 +15,25 @@ class DmolosController extends AppController {
  *
  * @var array
  */
-
 	public $components = array( 'Session',
 		'Paginator' => array(
 			'limit' => 10,
 			'order' => array('id' => 'desc')
-		)
+		),
+		'Search.Prg',
 	);
 
+	//認証されていれば、index, view, filedownloadのアクションを許可
 	public function isAuthorized($user) {
     if (in_array($this->action, array('index', 'view', 'filedownload'))) {
             return true;
         }
 	    return parent::isAuthorized($user);
 	}
+
+	//検索条件をURLのパラメータに保持するときのフォーマットの設定
+	//モデルの$filterArgsと同じ内容なので True として諸略する。
+	public $presetVars = true;
 
 /**
  * index method
@@ -37,6 +42,17 @@ class DmolosController extends AppController {
  */
 	public function index() {
 		$this->Dmolo->recursive = 0;
+		//検索条件データのハンドリング　RLに含まれる検索条件を解析
+		$this->Prg->commonProcess();
+		//モデルのfilterArgs に定義した内容にしたがってwhere条件が構成され、検索が行われる。
+		$this->paginate = array(
+			'conditions' => $this->Dmolo->parseCriteria($this->passedArgs),
+		);
+		$dmlTypes = $this->Dmolo->DmlType->find('list');
+		$layoutTypes = $this->Dmolo->LayoutType->find('list');
+		//配列の添え字を1からはじめる(1=>1)
+		$personNums = [1=>1,2,3,4,5,6,7,8,9,10,11,12];
+		$this->set(compact('dmlTypes', 'layoutTypes', 'personNums'));
 		$this->set('dmolos', $this->Paginator->paginate());
 	}
 

@@ -96,6 +96,10 @@ Configure::write('Dispatcher.filters', array(
 //git submodule update --init
 CakePlugin::load('TwitterBootstrap');
 
+//git submodule add git://github.com/CakeDC/search.git app/Plugin/Search
+//git submodule update --init
+CakePlugin::load('Search');
+
 /**
  * Configures default file logging options
  */

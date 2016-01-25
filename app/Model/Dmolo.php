@@ -8,6 +8,18 @@ App::uses('AppModel', 'Model');
  */
 class Dmolo extends AppModel {
 
+
+	//並び順を降順に(Controllerの'Paginator'で設定している)
+    //public $order = array('Dmolo.id desc');
+    public $actsAs = array('Search.Searchable');
+    //検索条件を設定
+    //methodを設定せず、dml_type_idで完全一致の絞り込みをする
+    public $filterArgs = array(
+        'dml_type_id' => array('type' => 'value'),
+        'layout_type_id' => array('type' => 'value'),
+        'person_num' => array('type' => 'value'),
+    );
+
 /**
  * Display field
  *

@@ -1,4 +1,24 @@
-<div class="pagination" align='right'>
+<div class="container" style="padding:5px; height:30px; background-color:#FFDBC9;color:#808080;border-radius: 5px;box-shadow: 5px 5px 5px #AAA; ">
+    <div class='row'>
+        <?php echo $this->Form->create('Dmolo', array('novalidate' => true)); ?>
+        <fieldset>
+            <div class='span3' align='left'>
+                <?php echo $this->Form->input('dml_type_id', array('label' => false, 'type' => 'select', 'error'=> false, 'empty' => 'Type : all')); ?>
+            </div>
+            <div class='span3' align='left'>
+                <?php echo $this->Form->input('layout_type_id', array('label' => false, 'type' => 'select', 'error'=> false, 'empty' => 'Layout type : all')); ?>
+            </div>
+            <div class='span3' align='left'>
+                <?php echo $this->Form->input('person_num', array('label' => false, 'type' => 'select', 'error'=> false, 'empty' => 'Surface : all')); ?>
+            </div>
+            <div class='span3' align='left'>
+                <?php echo $this->Form->end('filter'); ?>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div class="container pagination" align='right'>
   <ul>
     <?php echo $this->Paginator->prev(__('prev'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')); ?>
     <?php echo $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1, 'ellipsis' => '<li class="disabled"><a>...</a></li>')); ?>
@@ -10,6 +30,9 @@
 	<thead>
 	<tr>
 			<th>Image</th>
+            <th><?php echo __('dml_type_id'); ?></th>
+            <th><?php echo __('layout_type_id'); ?></th>
+            <th><?php echo __('person_num'); ?></th>
 			<th><?php echo __('Name'); ?></th>
 			<th><?php echo __('Summary'); ?></th>
 			<th><?php echo $this->Paginator->sort('price'); ?></th>
@@ -28,6 +51,9 @@
 			endif;
 			?>
 		</td>
+        <td><?php echo h($dmolo['Dmolo']['dml_type_id']); ?>&nbsp;</td>
+        <td><?php echo h($dmolo['Dmolo']['layout_type_id']); ?>&nbsp;</td>
+        <td><?php echo h($dmolo['Dmolo']['person_num']); ?>&nbsp;</td>
 		<td><?php echo h($dmolo['Dmolo']['name']); ?>&nbsp;</td>
 		<td><?php echo $dmolo['Dmolo']['note']; ?>&nbsp;</td>
 		<td><?php echo h($dmolo['Dmolo']['price']); ?>&nbsp;</td>
