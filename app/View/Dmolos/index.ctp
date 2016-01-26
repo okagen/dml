@@ -2,17 +2,23 @@
     <div class='row'>
         <?php echo $this->Form->create('Dmolo', array('novalidate' => true)); ?>
         <fieldset>
-            <div class='span3' align='left'>
-                <?php echo $this->Form->input('dml_type_id', array('label' => false, 'type' => 'select', 'error'=> false, 'empty' => 'Type : all')); ?>
+            <div class='span1' align='center'></div>
+            <div class='span3' align='center'>
+                <?php echo $this->Form->input('dml_type_id', array('label' => false, 'type' => 'select', 'error'=> false, 'empty' => 'D-MOLO & D-MOLO+')); ?>
             </div>
-            <div class='span3' align='left'>
-                <?php echo $this->Form->input('layout_type_id', array('label' => false, 'type' => 'select', 'error'=> false, 'empty' => 'Layout type : all')); ?>
+            <div class='span3' align='center'>
+                <?php echo $this->Form->input('layout_type_id', array('label' => false, 'type' => 'select', 'error'=> false, 'empty' => 'In line & Back to Back')); ?>
             </div>
-            <div class='span3' align='left'>
+            <div class='span3' align='center'>
                 <?php echo $this->Form->input('person_num', array('label' => false, 'type' => 'select', 'error'=> false, 'empty' => 'Surface : all')); ?>
             </div>
-            <div class='span3' align='left'>
-                <?php echo $this->Form->end('filter'); ?>
+            <div class='span2' align='left'>
+                <?php
+                    echo $this->Form->end(
+                        $this->Html->tag('i', '', array('class' => 'icon-search')) . " Filter",
+                        array('class' => 'btn btn-small btn-primary', 'escape' => false)
+                    );
+                ?>
             </div>
         </fieldset>
     </div>
