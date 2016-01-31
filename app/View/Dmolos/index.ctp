@@ -62,7 +62,12 @@
         <td><?php echo h($dmolo['Dmolo']['person_num']); ?>&nbsp;</td>
 		<td><?php echo h($dmolo['Dmolo']['name']); ?>&nbsp;</td>
 		<td><?php echo $dmolo['Dmolo']['note']; ?>&nbsp;</td>
-		<td><?php echo h($dmolo['Dmolo']['price']); ?>&nbsp;</td>
+		<td>
+            <?php
+            echo $this->Number->currency(h($dmolo['Dmolo']['price'], ''));
+            ?>
+            &nbsp;
+            </td>
 		<td>
             <?php
                 echo $this->Html->link(
