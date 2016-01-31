@@ -4,7 +4,6 @@
 /app/tmp
 /app/Plugin
 
-
 /lib/Cake/Console/Templates/skel/tmp/
 /build
 /dist
@@ -23,6 +22,7 @@ Thumbs.db
 
 # ignore files
 /app/webroot/files
+/app/webroot/img/thumbnail
 
 # Windows
 Thumbs.db

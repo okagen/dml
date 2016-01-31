@@ -31,7 +31,15 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
+
+
+// 本番環境設定
+if (env('DEV_ENV') == 'false') {
+	Configure::write('debug', 0);
+// テスト環境設定
+} else {
 	Configure::write('debug', 2);
+}
 
 /**
  * Configure the Error handler used to handle errors for your application. By default
