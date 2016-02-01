@@ -1,4 +1,50 @@
-<div class="container" style="padding:5px; height:30px; background-color:#FFDBC9;color:#808080;border-radius: 5px;box-shadow: 5px 5px 5px #AAA; ">
+<!-- お知らせの表示 2016.01.27 Y.Ezaki -->
+<?php $this->Html->scriptStart(array('inline' => false)); ?>
+    $(document).on('shown.bs.collapse', '.collapse', function(){
+        $('a[href="#' + this.id + '"]').find('span.icon-chevron-down')
+          .removeClass('icon-chevron-down').addClass('icon-chevron-up');
+    });
+
+    $(document).on('hide.bs.collapse', '.collapse', function(){
+        $('a[href="#' + this.id + '"]').find('span.icon-chevron-up')
+          .removeClass('icon-chevron-up').addClass('icon-chevron-down');
+    });
+<?php $this->Html->scriptEnd(); ?>
+<div class="container"><div class="row">
+        <div class='span1' align='center'><h5>News</h5></div>
+        <?php $i = 0 ?>
+        <?php foreach ($notifications as $notification): ?>
+            <?php if($i == 0): ?>
+                <!-- 最新のお知らせはアラートに表示する　-->
+                <div class='span10' align='left'><div class="alert alert-info" role="alert">
+                <?php echo h($notification['Notification']['title']); ?>&nbsp;:&nbsp;<?php echo h($notification['Notification']['message']); ?>
+                </div></div>
+                <div class='span1' align='center'>
+                <h6><a href="#news" class="list-group-item" data-toggle="collapse" data-target="#news"><font color="#000000">more...</f><span class="icon-chevron-down"></span></a></h6>
+                </div>
+                </div></div>
+
+                <!-- 2件目以降のお知らせはリストで折り畳み表示する　-->
+                <div id="news" class="collapse">
+                <ul>
+            <?php endif; ?>    
+            <?php if($i != 0): ?>
+                <div class="container"><div class="row">
+                <div class='span1' align='center'></div>
+                <div class='span10' align='left'>
+                <?php echo h($notification['Notification']['title']); ?>&nbsp;:&nbsp;<?php echo h($notification['Notification']['message']); ?>
+                </div>
+                <div class='span1' align='center'></div>
+                </div></div>
+    <?php endif ?>
+    <?php $i++ ?>
+<?php endforeach; ?>
+</ul>
+<br>
+</div>
+
+<!--<div class="container" style="padding:5px; height:30px; background-color:#FFDBC9;color:#808080;border-radius: 5px;box-shadow: 5px 5px 5px #AAA; ">-->
+<div class="container" style="padding:5px; height:30px; background-color:#FFDBC9;color:#808080;border-radius: 5px;">
     <div class='row'>
         <?php echo $this->Form->create('Dmolo', array('novalidate' => true)); ?>
         <fieldset>
@@ -36,8 +82,10 @@
 	<thead>
 	<tr>
 			<th>Image</th>
-            <th><?php echo __('dml_type_id'); ?></th>
-            <th><?php echo __('layout_type_id'); ?></th>
+            <!-- 2016.01.27 表示内容を変更 Y.Ezaki -->
+            <th><?php echo __('dml_type'); ?></th>
+            <th><?php echo __('layout_type'); ?></th>
+            <!-- 2016.01.27 表示内容を変更 Y.Ezaki -->
             <th><?php echo __('person_num'); ?></th>
 			<th><?php echo __('Name'); ?></th>
 			<th><?php echo __('Summary'); ?></th>
@@ -57,12 +105,14 @@
 			endif;
 			?>
 		</td>
-        <td><?php echo h($dmolo['Dmolo']['dml_type_id']); ?>&nbsp;</td>
-        <td><?php echo h($dmolo['Dmolo']['layout_type_id']); ?>&nbsp;</td>
+        <!-- 2016.01.27 表示内容を変更 Y.Ezaki -->
+        <td><?php echo h($dmolo['DmlType']['name']); ?>&nbsp;</td>
+        <td><?php echo h($dmolo['LayoutType']['name']); ?>&nbsp;</td>
+        <!-- 2016.01.27 表示内容を変更 Y.Ezaki -->
         <td><?php echo h($dmolo['Dmolo']['person_num']); ?>&nbsp;</td>
 		<td><?php echo h($dmolo['Dmolo']['name']); ?>&nbsp;</td>
 		<td><?php echo $dmolo['Dmolo']['note']; ?>&nbsp;</td>
-		<td><?php echo h($dmolo['Dmolo']['price']); ?>&nbsp;</td>
+		<td><?php echo h($dmolo['Dmolo']['price']); ?> USD&nbsp;</td>
 		<td>
             <?php
                 echo $this->Html->link(

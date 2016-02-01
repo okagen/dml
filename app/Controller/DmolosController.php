@@ -54,6 +54,13 @@ class DmolosController extends AppController {
 		$personNums = [1=>1,2,3,4,5,6];
 		$this->set(compact('dmlTypes', 'layoutTypes', 'personNums'));
 		$this->set('dmolos', $this->Paginator->paginate());
+
+		// 画面にお知らせを表示する 2016.01.27 Y.Ezaki
+		$this->loadModel('Notification');
+		$notifications = $this->Notification->find('all', array(
+			'conditions' => array('Notification.delete_flg = 0'),
+			'order' => 'Notification.id desc'));
+		$this->set('notifications', $notifications);
 	}
 
 /**
