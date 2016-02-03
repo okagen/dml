@@ -112,16 +112,12 @@
         <td><?php echo h($dmolo['Dmolo']['person_num']); ?>&nbsp;</td>
 		<td><?php echo h($dmolo['Dmolo']['name']); ?>&nbsp;</td>
 		<td><?php echo $dmolo['Dmolo']['note']; ?>&nbsp;</td>
-<<<<<<< .merge_file_a06692
-		<td><?php echo h($dmolo['Dmolo']['price']); ?> USD&nbsp;</td>
-=======
 		<td>
             <?php
             echo $this->Number->currency(h($dmolo['Dmolo']['price'], ''));
             ?>
             &nbsp;
             </td>
->>>>>>> .merge_file_a02912
 		<td>
             <?php
                 echo $this->Html->link(
