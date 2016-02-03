@@ -83,10 +83,10 @@
 	<tr>
 			<th>Image</th>
             <!-- 2016.01.27 表示内容を変更 Y.Ezaki -->
-            <th><?php echo __('dml_type'); ?></th>
-            <th><?php echo __('layout_type'); ?></th>
+            <th><?php echo __('Type'); ?></th>
+            <th><?php echo __('Layout'); ?></th>
             <!-- 2016.01.27 表示内容を変更 Y.Ezaki -->
-            <th><?php echo __('person_num'); ?></th>
+            <th><?php echo __('Top Boards'); ?></th>
 			<th><?php echo __('Name'); ?></th>
 			<th><?php echo __('Summary'); ?></th>
 			<th><?php echo $this->Paginator->sort('price'); ?></th>
