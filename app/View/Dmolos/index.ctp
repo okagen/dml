@@ -81,14 +81,14 @@
 <table class="table table-striped table-hover ">
 	<thead>
 	<tr>
-			<th>Image</th>
+			<th width="250px">Image</th>
             <!-- 2016.01.27 表示内容を変更 Y.Ezaki -->
-            <th><?php echo __('D-MOLO Type'); ?></th>
+            <th width="65px"><?php echo __('Type'); ?></th>
             <th><?php echo __('Layout'); ?></th>
             <!-- 2016.01.27 表示内容を変更 Y.Ezaki -->
-            <th><?php echo __('TopBoards'); ?></th>
+            <th><?php echo __('TopBD'); ?></th>
 			<th><?php echo __('Name'); ?></th>
-			<th><?php echo __('Summary'); ?></th>
+			<th width="290px"><?php echo __('Summary'); ?></th>
 			<th><?php echo $this->Paginator->sort('price'); ?></th>
 			<th><?php echo __(''); ?></th>
 	</tr>
