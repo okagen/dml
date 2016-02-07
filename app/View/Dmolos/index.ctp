@@ -88,8 +88,8 @@
             <!-- 2016.01.27 表示内容を変更 Y.Ezaki -->
             <th><?php echo __('TopBD'); ?></th>
 			<th><?php echo __('Name'); ?></th>
-			<th width="290px"><?php echo __('Summary'); ?></th>
-			<th><?php echo $this->Paginator->sort('price'); ?></th>
+			<th width="290px"><?php echo __('Main component'); ?></th>
+			<th><?php echo $this->Paginator->sort('price'); ?>(USD)</th>
 			<th><?php echo __(''); ?></th>
 	</tr>
 	</thead>

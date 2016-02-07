@@ -49,11 +49,11 @@
 
 		<div class='span9' style="height:400px; background-color:#FFDBC9;color:#808080;border-radius: 10px;box-shadow: 5px 5px 5px #AAA; ">
 			<div class="panel-heading">
-				<h3 class="panel-title" align="center">Configuration details</h3>
+				<h3 class="panel-title" align="center">Main component</h3>
 			</div>
 			<div>
 				<dl class="dl-horizontal">
-					<dt><?php echo __('Item'); ?></dt>
+					<dt><?php echo __('Name'); ?></dt>
 					<dd>
 						<?php echo h($dmolo['Dmolo']['name']); ?>
 						&nbsp;
@@ -68,17 +68,18 @@
 						<?php echo h($dmolo['LayoutType']['name']); ?>
 						&nbsp;
 					</dd>
-					<dt><?php echo __('Person Num'); ?></dt>
+					<dt><?php echo __('Number of TopBD'); ?></dt>
 					<dd>
 						<?php echo h($dmolo['Dmolo']['person_num']); ?>
 						&nbsp;
 					</dd>
-					<dt><?php echo __('Price'); ?></dt>
+					<dt><?php echo __('Price'); ?> (USD)</dt>
 					<dd>
-						<?php echo h($dmolo['Dmolo']['price']); ?>
-						&nbsp;
+            					<?php
+            					echo $this->Number->currency(h($dmolo['Dmolo']['price'], ''));
+            					?>
 					</dd>
-					<dt><?php echo __('Summary'); ?></dt>
+					<dt><?php echo __('Main component'); ?></dt>
 					<dd>
 						<?php echo $dmolo['Dmolo']['note']; ?>
 					<dt><?php echo __(''); ?></dt>
@@ -96,7 +97,7 @@
                     array('action' => 'filedownload', 'quo', $dmolo['Dmolo']['file_quotation'], $dmolo['Dmolo']['id']),
                     array('class' => 'btn btn-primary btn-block', 'escape' => false)
                 );
-                echo 'The file format for Excel 2010. <br/><br/>';
+                echo 'PDF file. <br/><br/>';
 
                 echo $this->Html->link(
                     $this->Html->tag('i', '', array('class' => 'icon-picture icon-white')) . " CG Perspective",
