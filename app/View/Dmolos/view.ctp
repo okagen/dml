@@ -111,7 +111,7 @@
                     array('action' => 'filedownload', 'dwg', $dmolo['Dmolo']['file_dwg'], $dmolo['Dmolo']['id']),
                     array('class' => 'btn btn-primary btn-block', 'escape' => false)
                 );
-                echo 'AutoCAD 2013 DWG file format. <br/><br/>';
+                echo 'AutoCAD 2010 DWG file format. <br/><br/>';
 
             ?>
 		</div>
