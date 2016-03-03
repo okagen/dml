@@ -41,26 +41,37 @@ class DmolosController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Dmolo->recursive = 0;
-		//検索条件データのハンドリング　RLに含まれる検索条件を解析
-		$this->Prg->commonProcess();
-		//モデルのfilterArgs に定義した内容にしたがってwhere条件が構成され、検索が行われる。
-		$this->paginate = array(
-			'conditions' => $this->Dmolo->parseCriteria($this->passedArgs),
-		);
-		$dmlTypes = $this->Dmolo->DmlType->find('list');
-		$layoutTypes = $this->Dmolo->LayoutType->find('list');
-		//配列の添え字を1からはじめる(1=>1)
-		$personNums = [1=>1,2,3,4,5,6];
-		$this->set(compact('dmlTypes', 'layoutTypes', 'personNums'));
-		$this->set('dmolos', $this->Paginator->paginate());
 
-		// 画面にお知らせを表示する 2016.01.27 Y.Ezaki
-		$this->loadModel('Notification');
-		$notifications = $this->Notification->find('all', array(
-			'conditions' => array('Notification.delete_flg = 0'),
-			'order' => 'Notification.id desc'));
-		$this->set('notifications', $notifications);
+	    try {
+			$this->Dmolo->recursive = 0;
+			//検索条件データのハンドリング　RLに含まれる検索条件を解析
+			$this->Prg->commonProcess();
+			//モデルのfilterArgs に定義した内容にしたがってwhere条件が構成され、検索が行われる。
+			$this->paginate = array(
+				'conditions' => $this->Dmolo->parseCriteria($this->passedArgs),
+			);
+			$dmlTypes = $this->Dmolo->DmlType->find('list');
+			$layoutTypes = $this->Dmolo->LayoutType->find('list');
+			//配列の添え字を1からはじめる(1=>1)
+			$personNums = [1=>1,2,3,4,5,6];
+			$this->set(compact('dmlTypes', 'layoutTypes', 'personNums'));
+			$this->set('dmolos', $this->Paginator->paginate());
+
+			// 画面にお知らせを表示する 2016.01.27 Y.Ezaki
+			$this->loadModel('Notification');
+			$notifications = $this->Notification->find('all', array(
+				'conditions' => array('Notification.delete_flg = 0'),
+				'order' => 'Notification.id desc'));
+			$this->set('notifications', $notifications);
+	    } catch (NotFoundException $e) {
+            $page = (isset($this->request->params['named']['page'])?$this->request->params['named']['page']:1);
+	        $this->Session->setFlash(__('Unable to find results on page: %s. Redirected you to page 1.', $page),
+	        							'alert', array(
+											'plugin' => 'TwitterBootstrap',
+											'class' => 'alert-error'
+										), 'flash');
+            return $this->redirect(array('page' => 1));
+	    }
 	}
 
 /**
